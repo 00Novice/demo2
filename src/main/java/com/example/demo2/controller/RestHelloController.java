@@ -1,4 +1,4 @@
-package com.example.demo2;
+package com.example.demo2.controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +24,31 @@ public class RestHelloController {
 
     @Autowired
     DataSource dataSource;
-
+    @Autowired
+    private DruidDataSource dataSourcepool;
     @GetMapping("/GetUserMeaasge")
     public Object GetUserMeaasge(String name) throws Exception {
         Connection connect = dataSource.getConnection();
+        PreparedStatement pre = connect.prepareStatement("select * from user where username =" +name);
+        ResultSet result = pre.executeQuery();
+        List<Map<String,Object>> list = new ArrayList<>();
+        while (result.next()) {
+            Map<String,Object> map = new HashMap<String, Object>();
+            map.put("id", result.getObject("id"));
+            map.put("username", result.getObject("username"));
+            map.put("password", result.getObject("password"));
+            map.put("email", result.getObject("email"));
+            list.add(map);
+        }
+        if(result!= null ) result.close();
+        if(pre!= null ) pre.close();
+        if(connect!= null ) connect.close();
+        return list;
+    }
+
+    @GetMapping("/GetUserMeaasge2")
+    public Object GetUserMeaasge2(String name) throws Exception {
+        Connection connect = dataSourcepool.getConnection();
         PreparedStatement pre = connect.prepareStatement("select * from user where username =" +name);
         ResultSet result = pre.executeQuery();
         List<Map<String,Object>> list = new ArrayList<>();
