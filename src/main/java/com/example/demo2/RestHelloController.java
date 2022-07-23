@@ -24,10 +24,10 @@ public class RestHelloController {
     @Autowired
     DataSource dataSource;
 
-    @GetMapping("/restHello")
-    public Object restHello(String a) throws Exception {
+    @GetMapping("/GetUserMeaasge")
+    public Object GetUserMeaasge(String name) throws Exception {
         Connection connect = dataSource.getConnection();
-        PreparedStatement pre = connect.prepareStatement("select * from user where username =" +a);
+        PreparedStatement pre = connect.prepareStatement("select * from user where username =" +name);
         ResultSet result = pre.executeQuery();
         List<Map<String,Object>> list = new ArrayList<>();
         while (result.next()) {
