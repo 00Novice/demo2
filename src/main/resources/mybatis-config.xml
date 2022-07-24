@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <properties resource="application.properties"></properties>
+    <properties resource="jdbc.properties"></properties>
     <typeAliases>
         <package name="com.example.demo2.pojo"/>
     </typeAliases>
@@ -22,6 +22,6 @@
         <!-- 使用xml文件实现mapper文件配置如下 resource对应的值是包名和对相应xml文件名-->
         <mapper resource="UserMapper.xml"></mapper>
         <!-- 使用注解实现mapper配置如下 class对应的值是注解所在包名和对象名-->
-        <mapper class="UserMapper"/>
+        <mapper class="com.example.demo2.pojo.User"/>
     </mappers>
 </configuration>
