@@ -80,7 +80,7 @@ public class RestHelloController {
         InputStream is = Resources.getResourceAsStream("mybatis-config.xml");
         sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
         sqlSession=sqlSessionFactory.openSession();
-        User findNameById = sqlSession.selectOne("findNameById", name);
+        User findNameById = sqlSession.selectOne("findNameByName", name);
         sqlSession.commit();
         sqlSession.close();
         return findNameById;
