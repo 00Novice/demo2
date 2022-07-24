@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="application.properties"></properties>
+    <typeAliases>
+        <package name="com.example.demo2.pojo"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!-- 使用xml文件实现mapper文件配置如下 resource对应的值是包名和对相应xml文件名-->
+        <mapper resource="UserMapper.xml"></mapper>
+        <!-- 使用注解实现mapper配置如下 class对应的值是注解所在包名和对象名-->
+        <mapper class="UserMapper"/>
+    </mappers>
+</configuration>
