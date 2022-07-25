@@ -19,6 +19,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +37,9 @@ public class RestHelloController {
     DataSource dataSource;
     @Autowired
     private DruidDataSource dataSourcepool;
+    //  根据类型依赖注入
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
     private SqlSessionFactory sqlSessionFactory;
     private SqlSession sqlSession;
     @GetMapping("/GetUserMeaasge")
@@ -85,4 +92,10 @@ public class RestHelloController {
         sqlSession.close();
         return findNameById;
     }
+    @GetMapping("/GetUserMeaasge4")
+    public Object GetUserMessage4(String name) throws Exception {
+        List<User> query = jdbcTemplate.query("select * from user where username = ?", new BeanPropertyRowMapper<>(User.class), name);
+        return query;
+    }
+
 }
