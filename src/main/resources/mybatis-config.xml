@@ -20,7 +20,7 @@
     </environments>
     <mappers>
         <!-- 使用xml文件实现mapper文件配置如下 resource对应的值是包名和对相应xml文件名-->
-        <mapper resource="UserMapper.xml"></mapper>
+        <mapper resource="mapper/UserMapper.xml"/>
         <!-- 使用注解实现mapper配置如下 class对应的值是注解所在包名和对象名-->
         <mapper class="com.example.demo2.pojo.User"/>
     </mappers>

@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.example.demo2.mapper.UserMapper;
 import com.example.demo2.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -40,6 +41,8 @@ public class RestHelloController {
     //  根据类型依赖注入
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private UserMapper userMapper;
     private SqlSessionFactory sqlSessionFactory;
     private SqlSession sqlSession;
     @GetMapping("/GetUserMeaasge")
@@ -96,6 +99,17 @@ public class RestHelloController {
     public Object GetUserMessage4(String name) throws Exception {
         List<User> query = jdbcTemplate.query("select * from user where username = ?", new BeanPropertyRowMapper<>(User.class), name);
         return query;
+    }
+
+    @GetMapping("/GetUserMeaasge5")
+    public Object GetUserMessage5(String name) {
+        return userMapper.findNameByName(name);
+    }
+
+    @GetMapping("/addUser")
+    public String addUser(){
+        userMapper.addUser(new User(21,"阿毛","123456","100@qq.com"));
+        return "添加成功";
     }
 
 }
