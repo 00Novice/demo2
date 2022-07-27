@@ -6,15 +6,25 @@ public class User {
     private String username;
     public String password;
     public String email;
+    public String nickname;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
     public User() {
     }
 
-    public User(int id, String username, String password, String email) {
+    public User(int id, String username, String password, String email,String nickname) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.nickname = nickname;
     }
 
     public int getId() {
@@ -56,6 +66,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", nickname='" + nickname + '\'' +
                 '}';
     }
 }

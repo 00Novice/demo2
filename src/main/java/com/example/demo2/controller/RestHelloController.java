@@ -108,7 +108,7 @@ public class RestHelloController {
 
     @GetMapping("/addUser")
     public String addUser(){
-        userMapper.addUser(new User(21,"阿毛","123456","100@qq.com"));
+        userMapper.addUser(new User(21,"阿毛","123456","100@qq.com","测试"));
         return "添加成功";
     }
 

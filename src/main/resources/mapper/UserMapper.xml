@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo2.mapper.UserMapper">
-    <select id="findNameByName" parameterType="java.lang.String" resultType="com.example.demo2.pojo.User">
+    <resultMap id="fieldMapper" type="com.example.demo2.pojo.User">
+        <result property="id" column="id" /><!--UUID-->
+        <result property="username" column="username" /><!--创建时间-->
+        <result property="password" column="password" /><!--修改时间-->
+        <result property="email" column="email" /><!--创建人uuid-->
+        <result property="nickname" column="nickname" /><!--创建人uuid-->
+    </resultMap>
+    <select id="findNameByName" parameterType="java.lang.String" resultMap="fieldMapper">
         select * from user where username=#{name}
     </select>
     <insert id="addUser" parameterType="com.example.demo2.pojo.User">
-    insert into mybatis.user(id,username,password,email)
-    values(#{id},#{username},#{password},#{email});
+    insert into user (id,username,password,email,nickname)
+    values(#{id},#{username},#{password},#{email},#{nickname});
     </insert>
 </mapper>
